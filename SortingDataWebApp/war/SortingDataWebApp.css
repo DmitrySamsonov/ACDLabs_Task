@@ -17,7 +17,7 @@ h1 {
 
 /** Most GWT widgets already have a style name defined */
 .gwt-DialogBox {
-  width: 400px;
+  width: 200px;
 }
 
 .dialogVPanel {
@@ -40,19 +40,33 @@ h1 {
   border-collapse: collapse;
   
   padding: 5px;
-  margin:5px;
+  margin: 10px;
+  margin-top: 0px;
 }
 	
 .td {
 	border: 1px solid black;
 }
 
-.processButton {
-	margin:10px;
-	padding: 5px;
+.button {
+	margin: 20px;
+	padding: 10px;
 }
+
 
 .textarea {
 	margin:10px;
 	padding: 5px;
+	margin-top: 0px;
 }
+
+#sortingwidget {
+	margin: auto;
+	width: 50%;
+}
+
+
+
+
+
+
