@@ -97,7 +97,9 @@ public class SortingDataWebApp implements EntryPoint {
 		inputDataTextarea.setCharacterWidth(40);
 		inputDataTextarea.setVisibleLines(20);
 		
+		inputDataTextarea.addStyleName("textarea");
 		grid.addStyleName("grid");
+		processButton.addStyleName("processButton");
 		
 		horizontalPanel.add(inputDataTextarea);
 		horizontalPanel.add(processButton);
