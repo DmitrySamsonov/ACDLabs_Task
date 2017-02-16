@@ -4,11 +4,9 @@ import java.util.*;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -18,7 +16,6 @@ public class SortingDataWebApp implements EntryPoint {
 
 	private HorizontalPanel horizontalPanel = new HorizontalPanel();
 	private TextArea inputDataTextarea = new TextArea();
-	private FlexTable displayResultTable = new FlexTable();
 	private Button processButton = new Button("Process");
 	private Grid grid = new Grid();
 	
@@ -31,56 +28,41 @@ public class SortingDataWebApp implements EntryPoint {
 		
 		drawElements();
 		
+		// initialization		
+		inputDataTextarea.setText(
+				"-2.2	2	3	4	329	2" + "\n" + 
+				"2.2	12345q	69	-afg" + "\n" +
+				"2.2	12345q	69	-asdf" + "\n" +
+				"-22	1234234	asdfasf	asdgas" + "\n" +
+				"-22	11	abc" + "\n" +
+				"-22	-3	4" + "\n" +
+				"" + "\n" +
+				"-1.1" + "\n" +
+				"" + "\n" +
+				"qqqq	1.1");
+		
+		
+		// Move cursor focus to the input box.
+		inputDataTextarea.setFocus(true);
+				
+	
+		
 		// Listen for mouse events on the Process button.
 		processButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				sortData();
+				
+				String inputData = inputDataTextarea.getText();
+				
+				String[] sortedData = Sorter.sort(inputData);
+				
+				insertDataToGrid(sortedData);
 			}
 		});
 	
 		
-		
 	}
 
-	private void drawElements() {
-		
-		// Let's make an 80x50 text area to go along with the other two.
-		inputDataTextarea.setCharacterWidth(40);
-		inputDataTextarea.setVisibleLines(20);
-		
-		grid.addStyleName("grid");
-		
-		horizontalPanel.add(inputDataTextarea);
-		horizontalPanel.add(processButton);
-		horizontalPanel.add(grid);
-
-		RootPanel.get("sortingwidget").add(horizontalPanel);		
-		
-		// Move cursor focus to the input box.
-		inputDataTextarea.setFocus(true);
-		
-		
-		String str_init = 
-		"-2.2	2	3	4	329	2" + "\n" + 
-		"2.2	12345q	69	-afg" + "\n" +
-		"2.2	12345q	69	-asdf" + "\n" +
-		"-22	1234234	asdfasf	asdgas" + "\n" +
-		"-22	11	abc" + "\n" +
-		"-22	-3	4" + "\n" +
-		"" + "\n" +
-		"-1.1" + "\n" +
-		"" + "\n" +
-		"qqqq	1.1";
-		
-		inputDataTextarea.setText(str_init);
-	}
-
-	private void sortData() {
-		final String input_Data = inputDataTextarea.getText();
-		inputDataTextarea.setFocus(true);
-		
-		String[] lines = Sorter.sort(input_Data);
-	
+	private void insertDataToGrid(String[] lines) {
 		int max_row = lines.length;
 		int max_column = 0;
 		for(String line : lines){
@@ -89,14 +71,10 @@ public class SortingDataWebApp implements EntryPoint {
 				max_column = words.length;
 		}
 		
-		
-//		grid = new Grid(max_row, max_column);
 		grid.resize(max_row, max_column);
 		for(int row = 0; row < grid.getRowCount(); row++)
 			for(int column = 0; column < grid.getColumnCount() ;column++)
 				grid.clearCell(row, column);
-		
-		
 
 		
 		for(int row = 0; row < lines.length ; row++){
@@ -112,7 +90,20 @@ public class SortingDataWebApp implements EntryPoint {
 				
 			}
 		}
+	}
+	
+	private void drawElements() {
+		// make an 40x20 text area
+		inputDataTextarea.setCharacterWidth(40);
+		inputDataTextarea.setVisibleLines(20);
+		
+		grid.addStyleName("grid");
+		
+		horizontalPanel.add(inputDataTextarea);
+		horizontalPanel.add(processButton);
+		horizontalPanel.add(grid);
 
+		RootPanel.get("sortingwidget").add(horizontalPanel);		
 	}
 	
 }
