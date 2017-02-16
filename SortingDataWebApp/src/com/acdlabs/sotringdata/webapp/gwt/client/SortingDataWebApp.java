@@ -4,7 +4,6 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -14,7 +13,6 @@ import com.google.gwt.storage.client.Storage;
 public class SortingDataWebApp implements EntryPoint {
 
 	private HorizontalPanel horizontalPanel = new HorizontalPanel();
-	private VerticalPanel verticalPanel = new VerticalPanel();
 	private TextArea inputDataTextarea = new TextArea();
 	private Button processButton = new Button("Process");
 	private Button initButton = new Button("Set some data");
